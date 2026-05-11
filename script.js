@@ -1,6 +1,9 @@
 /** Override from the console or a small inline script: window.HAWN_API_BASE = 'http://127.0.0.1:8000' */
 const API_BASE = (window.HAWN_API_BASE || "http://127.0.0.1:8000").replace(/\/$/, "");
 
+/** Fake “preprocessing” screen delay (ms). 0 = skip wait. 800–1000 feels natural without slowing the app. */
+const PREPROCESSING_DELAY_MS = 800;
+
 /**
  * Same content as first-aid-guidance.json. Used when fetch() fails (e.g. opening index.html as file://
  * or wrong server cwd). HTTP deployments still prefer loading the JSON file when available.
@@ -240,7 +243,10 @@ function showView(name) {
   }
 
   if (requested === "preprocessing") {
-    state.activeTimer = setTimeout(() => navigate("analyzing"), 2000);
+    state.activeTimer = setTimeout(
+      () => navigate("analyzing"),
+      PREPROCESSING_DELAY_MS
+    );
   }
 
   if (requested === "analyzing") {
