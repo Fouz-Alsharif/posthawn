@@ -165,16 +165,23 @@
         </section>
 
         <section class="view" id="analyzingView" data-view="analyzing">
-          <div class="loading-panel">
-            <div class="spinner large"></div>
-            <h2>Analyzing Burn Characteristics</h2>
-            <p class="muted center">YOLO 11 is analyzing visual features...</p>
-            <ul class="analysis-list">
+          <div class="loading-panel" id="analyzingLoadingPanel">
+            <div class="spinner large" id="analyzingSpinner" aria-hidden="true"></div>
+            <h2 id="analyzingHeading">Analyzing burn characteristics</h2>
+            <p class="muted center" id="analyzingStatus">Preparing image for the model…</p>
+            <ul class="analysis-list" id="analyzingChecklist">
               <li>Examining color intensity patterns</li>
               <li>Analyzing tissue texture</li>
               <li>Detecting wound boundaries</li>
               <li>Assessing tissue damage indicators</li>
             </ul>
+          </div>
+          <div class="narrow-panel" id="analyzingErrorPanel" hidden>
+            <h2 class="page-title">Analysis could not be completed</h2>
+            <div class="error-box" id="analyzingError"></div>
+            <div class="button-stack">
+              <a class="primary-button full" href="#analyze">Back to upload</a>
+            </div>
           </div>
         </section>
 
@@ -187,8 +194,8 @@
             <div class="result-card">
               <span class="result-icon">✓</span>
               <div>
-                <p id="resultTitle">Classification: Second-degree burn</p>
-                <p class="muted small-text">Confidence: 96%</p>
+                <p id="resultTitle">Classification: —</p>
+                <p class="muted small-text" id="resultConfidence">Confidence: —</p>
               </div>
             </div>
             <div class="button-stack">
@@ -237,6 +244,7 @@
       </footer>
     </div>
 
+    <script src="deploy-config.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
