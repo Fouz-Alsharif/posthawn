@@ -14,7 +14,7 @@ export default function PreprocessingPage() {
 
     const timer = setTimeout(() => {
       navigate('/analyzing', { state: { imageData } });
-    }, 2000);
+    }, 800);
 
     return () => clearTimeout(timer);
   }, [imageData, navigate]);
