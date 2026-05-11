@@ -260,7 +260,8 @@ function showView(name) {
     if (resultConfidence) {
       const c = state.confidence;
       if (c != null && !Number.isNaN(c)) {
-        resultConfidence.textContent = `Confidence: ${(c * 100).toFixed(1)}%`;
+        /* 2 decimals so e.g. 99.58% does not round to 100.0% */
+        resultConfidence.textContent = `Confidence: ${(c * 100).toFixed(2)}%`;
       } else {
         resultConfidence.textContent = "Confidence: —";
       }
