@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HAWN Burn Assessment</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <div class="header-inner">
+          <button class="icon-button" id="menuButton" type="button" aria-label="Open menu">
+            <span class="icon-menu"></span>
+          </button>
+          <a class="icon-button" href="#home" aria-label="Home">
+            <span class="icon-home"></span>
+          </a>
+        </div>
+      </header>
+
+      <aside class="side-menu" id="sideMenu" aria-hidden="true">
+        <div class="side-menu-header">
+          <h2>Menu</h2>
+          <button class="icon-button" id="closeMenuButton" type="button" aria-label="Close menu">
+            <span class="icon-close"></span>
+          </button>
+        </div>
+        <nav class="side-nav">
+          <a href="#home">Home</a>
+          <a href="#about">About Us</a>
+          <a href="#user-guide">User Guide</a>
+        </nav>
+      </aside>
+      <button class="menu-backdrop" id="menuBackdrop" type="button" aria-label="Close menu"></button>
+
+      <main class="main-content">
+        <section class="view is-active" id="homeView" data-view="home">
+          <div class="narrow-panel center">
+            <div class="logo" aria-label="HAWN logo">
+              <img src="src/imports/logo.png" alt="HAWN logo" />
+            </div>
+            <h1>HAWN</h1>
+            <h2 class="subheading">AI-Powered Burn Classification</h2>
+            <p class="muted">Get instant preliminary burn assessment using advanced artificial intelligence technology.</p>
+            <a class="primary-button full" href="#analyze">Get Started</a>
+
+            <div class="notice info left">
+              <h3>Medical Disclaimer</h3>
+              <p>This system is intended for preliminary assessment and educational purposes only.</p>
+              <p>It does not replace professional medical diagnosis or treatment.</p>
+              <p>No personally identifiable information or sensitive medical data is collected or stored without proper user consent. Always seek professional medical care for burn injuries.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="aboutView" data-view="about">
+          <div class="content-panel">
+            <h1 class="page-title">About Us</h1>
+            <article class="card">
+              <p>HAWN is an AI-powered burn assessment system developed as a graduation project by our team members:</p>
+              <ul>
+                <li>Maria Alamri</li>
+                <li>Fouz Alsharif</li>
+                <li>Lama Aloufi</li>
+                <li>Judy Alomiri</li>
+              </ul>
+              <p>The system is designed to provide preliminary burn assessment and educational first aid guidance using artificial intelligence technologies.</p>
+              <p>HAWN is intended for informational and educational purposes only and does not replace professional medical diagnosis, consultation, or treatment. Users are encouraged to seek medical attention from qualified healthcare professionals for accurate evaluation and proper care.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="guideView" data-view="user-guide">
+          <div class="wide-panel">
+            <div class="center section-intro">
+              <h1>User Guide</h1>
+              <p class="muted">Simple steps to get AI-powered burn assessment and first aid guidance.</p>
+            </div>
+
+            <h2 class="center">How It Works</h2>
+            <div class="steps-grid">
+              <div class="guide-step">
+                <span class="round-icon">1</span>
+                <div>
+                  <h3>Upload or Capture Image</h3>
+                  <p>Take a clear photo of the burn area or upload an existing image, JPEG or PNG, max 3 MB.</p>
+                </div>
+              </div>
+              <div class="guide-step">
+                <span class="round-icon">2</span>
+                <div>
+                  <h3>AI Analysis</h3>
+                  <p>Our AI analyzes color patterns, tissue texture, and damage indicators to classify the burn.</p>
+                </div>
+              </div>
+              <div class="guide-step">
+                <span class="round-icon">3</span>
+                <div>
+                  <h3>Get Results</h3>
+                  <p>Receive burn classification with confidence score and severity assessment.</p>
+                </div>
+              </div>
+              <div class="guide-step">
+                <span class="round-icon">4</span>
+                <div>
+                  <h3>First Aid Guidance</h3>
+                  <p>Access immediate first aid recommendations tailored to your burn classification.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="notice info">
+              <h3>Medical Disclaimer</h3>
+              <p>This system provides preliminary guidance only and does not replace professional medical diagnosis or treatment. Always consult a healthcare professional for burn injuries.</p>
+            </div>
+            <div class="center">
+              <a class="primary-button" href="#analyze">Start Analysis</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="analyzeView" data-view="analyze">
+          <div class="narrow-panel">
+            <h1 class="page-title">Burn Image Analysis</h1>
+            <div class="error-box" id="uploadError" hidden></div>
+            <div class="button-stack">
+              <button class="primary-button full" id="captureButton" type="button">Capture with Camera</button>
+              <label class="secondary-button full file-label">
+                Upload from Gallery
+                <input id="galleryInput" type="file" accept="image/jpeg,image/png,image/*" />
+              </label>
+              <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
+            </div>
+            <div class="requirements">
+              <h3>Requirements:</h3>
+              <ul>
+                <li>Image format: JPEG or PNG</li>
+                <li>Maximum file size: 3 MB</li>
+                <li>Clear, well-lit image of the burn area</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="confirmView" data-view="confirm">
+          <div class="narrow-panel">
+            <h1 class="page-title">Confirm Image</h1>
+            <div class="image-preview">
+              <img id="confirmImage" src="" alt="Burn preview" />
+            </div>
+            <div class="button-stack">
+              <button class="primary-button full" id="confirmAnalyzeButton" type="button">Confirm &amp; Analyze</button>
+              <a class="secondary-button full" href="#analyze">Replace Image</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="preprocessingView" data-view="preprocessing">
+          <div class="loading-panel">
+            <div class="spinner small"></div>
+            <h2>Preprocessing Image</h2>
+            <p class="muted center">Resizing, normalizing, and isolating burn region...</p>
+          </div>
+        </section>
+
+        <section class="view" id="analyzingView" data-view="analyzing">
+          <div class="loading-panel">
+            <div class="spinner large"></div>
+            <h2>Analyzing Burn Characteristics</h2>
+            <p class="muted center">YOLO 11 is analyzing visual features...</p>
+            <ul class="analysis-list">
+              <li>Examining color intensity patterns</li>
+              <li>Analyzing tissue texture</li>
+              <li>Detecting wound boundaries</li>
+              <li>Assessing tissue damage indicators</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="view" id="resultsView" data-view="results">
+          <div class="narrow-panel">
+            <h1 class="page-title">Analysis Results</h1>
+            <div class="image-preview">
+              <img id="resultImage" src="" alt="Analyzed burn" />
+            </div>
+            <div class="result-card">
+              <span class="result-icon">✓</span>
+              <div>
+                <p id="resultTitle">Classification: Second-degree burn</p>
+                <p class="muted small-text">Confidence: 96%</p>
+              </div>
+            </div>
+            <div class="button-stack">
+              <a class="primary-button full" href="#guidance">View First Aid Guidance</a>
+              <a class="secondary-button full" href="#analyze">Analyze Another Image</a>
+            </div>
+            <div class="notice neutral">
+              <h3>Important:</h3>
+              <p>This is a preliminary assessment only. Always consult a healthcare professional for proper diagnosis and treatment.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="guidanceView" data-view="guidance">
+          <div class="content-panel">
+            <h1 class="page-title">First Aid Guidance</h1>
+            <article class="card" id="guidanceCard">
+              <h2 id="guidanceTitle">Loading guidance...</h2>
+              <p id="guidanceDescription" class="muted"></p>
+              <div class="guidance-section">
+                <h3 class="do-heading">First Aid Instructions - Do:</h3>
+                <div class="guidance-list" id="doList"></div>
+              </div>
+              <div class="guidance-section">
+                <h3 class="dont-heading">Do Not:</h3>
+                <div class="guidance-list" id="doNotList"></div>
+              </div>
+              <div class="notice danger" id="medicalAttention" hidden></div>
+            </article>
+            <a class="primary-button full" href="#analyze">Analyze Another Image</a>
+            <div class="notice neutral">
+              <h3>Medical Disclaimer:</h3>
+              <p>This system provides preliminary guidance only and does not replace professional medical diagnosis or treatment. No personally identifiable information or sensitive data is collected without consent. Always seek professional medical care for burn injuries.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#about">About Us</a>
+          <a href="#user-guide">User Guide</a>
+        </nav>
+        <p>@hawn 2025</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

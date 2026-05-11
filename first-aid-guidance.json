@@ -1,0 +1,56 @@
+{
+  "first_degree": {
+    "title": "First-Degree Burns (Minor Burns)",
+    "description": "",
+    "do": [
+      "Cool the burn under cool running tap water for 10-15 minutes to help relieve pain and soothe the skin.",
+      "Remove accessories such as rings, watches, belts, shoes, or tight clothing gently and quickly before swelling begins.",
+      "Cover the burned area with a moist bandage or a clean cool cloth to reduce the risk of infection.",
+      "Take pain relief medication if necessary to help reduce discomfort.",
+      "Seek medical help immediately if the burn is severe, covers a large area, or if signs of infection appear such as increased pain, redness, or swelling."
+    ],
+    "doNot": [
+      "Do not touch or break burn blisters.",
+      "Do not apply ointments, butter, toothpaste, or other home remedies to the burn.",
+      "Do not apply ice directly to the burned area."
+    ]
+  },
+  "second_degree": {
+    "title": "Second-Degree Burns",
+    "description": "",
+    "do": [
+      "Protect the injured person from further harm.",
+      "Remove jewelry, belts, and tight items, especially around burned areas such as the neck.",
+      "Take pain relief medication if necessary to reduce pain.",
+      "Cover the burn with a moist bandage or a clean cool cloth.",
+      "Cover opened blisters with a dry sterile dressing."
+    ],
+    "doNot": [
+      "Do not remove burned clothing stuck to the skin.",
+      "Do not cover the burn with adhesive dressings.",
+      "Do not place large burned areas in cold water to avoid shock.",
+      "Do not apply ice directly to the burned area.",
+      "Do not apply ointments, butter, toothpaste, or other remedies to the burn.",
+      "Do not touch or break burn blisters.",
+      "Do not place loose cotton directly on the burned area as it may irritate the skin."
+    ]
+  },
+  "third_degree": {
+    "title": "Third-Degree Burns",
+    "description": "Third-degree burns are considered the most severe type of burns, affecting all layers of the skin and possibly reaching fat and muscles.",
+    "do": [
+      "Call emergency medical services immediately and follow these steps until help arrives.",
+      "Check the victim's vital signs such as breathing.",
+      "Protect the injured person from further harm by moving them away from flames, smoke, or heat sources.",
+      "Raise the injured area above heart level if possible.",
+      "Cover the burn with a moist bandage or a clean cool cloth."
+    ],
+    "doNot": [
+      "Do not remove burned clothing stuck to the skin.",
+      "Do not place large burned areas in cold water to avoid shock, which can cause a sudden drop in body temperature.",
+      "Do not cover the burn with adhesive dressings.",
+      "Do not apply ointments, butter, toothpaste, or other remedies to the burn.",
+      "Do not place loose cotton directly on the burned area as it may irritate the wound."
+    ]
+  }
+}
