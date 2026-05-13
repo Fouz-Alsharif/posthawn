@@ -23,6 +23,17 @@ ALLOWED_CONTENT_TYPES = frozenset(
     {"image/jpeg", "image/png", "image/webp", "image/jpg", "image/pjpeg", "image/x-png"}
 )
 
+# Reject "ambiguous" predictions (e.g. random photos). Tune on Render via env vars.
+# Not medically perfect — the model has no "not a burn" class; this is a heuristic guardrail.
+PREDICTION_MIN_TOP1_CONF = float(os.environ.get("PREDICTION_MIN_TOP1_CONF", "0.62"))
+PREDICTION_MIN_TOP1_TOP2_MARGIN = float(os.environ.get("PREDICTION_MIN_TOP1_TOP2_MARGIN", "0.12"))
+SKIP_UNCERTAINTY_CHECK = os.environ.get("SKIP_UNCERTAINTY_CHECK", "").lower() in ("1", "true", "yes")
+
+UNCERTAINTY_DETAIL = (
+    "لم يتم التعرف بثقة على صورة حرق واضحة. ارفع صورة واضحة وقريبة لمنطقة الحرق فقط. / "
+    "Could not confidently identify a burn wound. Please upload a clear, close-up photo of the burn area only."
+)
+
 app = FastAPI(title="Burn classification API")
 
 _cors_raw = os.environ.get("CORS_ORIGINS", "*").strip()
@@ -120,9 +131,12 @@ async def predict(file: UploadFile | None = File(default=None)) -> dict:
 
     try:
         results = model.predict(img, imgsz=224, verbose=False)[0]
-        pred_idx = results.probs.top1
+        probs = results.probs
+        pred_idx = probs.top1
         pred_class = results.names[pred_idx]
-        confidence = float(results.probs.top1conf)
+        top1c = float(probs.top1conf.item()) if hasattr(probs.top1conf, "item") else float(probs.top1conf)
+        t5 = probs.top5conf.tolist() if hasattr(probs.top5conf, "tolist") else list(probs.top5conf)
+        margin = (float(t5[0]) - float(t5[1])) if len(t5) >= 2 else 1.0
     except Exception as e:  # noqa: BLE001
         print(f"[ERROR] Prediction failed: {e}")
         traceback.print_exc()
@@ -130,6 +144,17 @@ async def predict(file: UploadFile | None = File(default=None)) -> dict:
             status_code=500,
             detail=f"Model prediction failed: {e}",
         ) from e
+
+    if not SKIP_UNCERTAINTY_CHECK and (
+        top1c < PREDICTION_MIN_TOP1_CONF or margin < PREDICTION_MIN_TOP1_TOP2_MARGIN
+    ):
+        print(
+            f"[REJECT] Uncertain prediction: top1={top1c:.4f} margin={margin:.4f} "
+            f"(need conf>={PREDICTION_MIN_TOP1_CONF}, margin>={PREDICTION_MIN_TOP1_TOP2_MARGIN})"
+        )
+        raise HTTPException(status_code=422, detail=UNCERTAINTY_DETAIL)
+
+    confidence = top1c
 
     print(f"[RESULT] {filename!r} -> {pred_class} ({confidence * 100:.2f}%)")
 
