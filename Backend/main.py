@@ -25,13 +25,13 @@ ALLOWED_CONTENT_TYPES = frozenset(
 
 # Reject "ambiguous" predictions (e.g. random photos). Tune on Render via env vars.
 # Not medically perfect — the model has no "not a burn" class; this is a heuristic guardrail.
-PREDICTION_MIN_TOP1_CONF = float(os.environ.get("PREDICTION_MIN_TOP1_CONF", "0.62"))
+# Reject when top-1 confidence is 70% or below (accept only if > 70%).
+PREDICTION_MIN_TOP1_CONF = float(os.environ.get("PREDICTION_MIN_TOP1_CONF", "0.70"))
 PREDICTION_MIN_TOP1_TOP2_MARGIN = float(os.environ.get("PREDICTION_MIN_TOP1_TOP2_MARGIN", "0.12"))
 SKIP_UNCERTAINTY_CHECK = os.environ.get("SKIP_UNCERTAINTY_CHECK", "").lower() in ("1", "true", "yes")
 
 UNCERTAINTY_DETAIL = (
-    "لم يتم التعرف بثقة على صورة حرق واضحة. ارفع صورة واضحة وقريبة لمنطقة الحرق فقط. / "
-    "Could not confidently identify a burn wound. Please upload a clear, close-up photo of the burn area only."
+    "Unable to analyze this image. Please upload a clear, close-up photo of the burn area only."
 )
 
 app = FastAPI(title="Burn classification API")
@@ -146,11 +146,11 @@ async def predict(file: UploadFile | None = File(default=None)) -> dict:
         ) from e
 
     if not SKIP_UNCERTAINTY_CHECK and (
-        top1c < PREDICTION_MIN_TOP1_CONF or margin < PREDICTION_MIN_TOP1_TOP2_MARGIN
+        top1c <= PREDICTION_MIN_TOP1_CONF or margin < PREDICTION_MIN_TOP1_TOP2_MARGIN
     ):
         print(
             f"[REJECT] Uncertain prediction: top1={top1c:.4f} margin={margin:.4f} "
-            f"(need conf>={PREDICTION_MIN_TOP1_CONF}, margin>={PREDICTION_MIN_TOP1_TOP2_MARGIN})"
+            f"(need conf>{PREDICTION_MIN_TOP1_CONF}, margin>={PREDICTION_MIN_TOP1_TOP2_MARGIN})"
         )
         raise HTTPException(status_code=422, detail=UNCERTAINTY_DETAIL)
 
