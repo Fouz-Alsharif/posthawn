@@ -25,9 +25,10 @@ ALLOWED_CONTENT_TYPES = frozenset(
 
 # Reject "ambiguous" predictions (e.g. random photos). Tune on Render via env vars.
 # Not medically perfect — the model has no "not a burn" class; this is a heuristic guardrail.
-# Reject when top-1 confidence is 70% or below (accept only if > 70%).
-PREDICTION_MIN_TOP1_CONF = float(os.environ.get("PREDICTION_MIN_TOP1_CONF", "0.70"))
-PREDICTION_MIN_TOP1_TOP2_MARGIN = float(os.environ.get("PREDICTION_MIN_TOP1_TOP2_MARGIN", "0.12"))
+# Reject when top-1 confidence is at or below this value (accept only if strictly higher).
+# 0.75 blocks many non-burn images that still score ~71% (e.g. logos). Tune via PREDICTION_MIN_TOP1_CONF on Render.
+PREDICTION_MIN_TOP1_CONF = float(os.environ.get("PREDICTION_MIN_TOP1_CONF", "0.75"))
+PREDICTION_MIN_TOP1_TOP2_MARGIN = float(os.environ.get("PREDICTION_MIN_TOP1_TOP2_MARGIN", "0.15"))
 SKIP_UNCERTAINTY_CHECK = os.environ.get("SKIP_UNCERTAINTY_CHECK", "").lower() in ("1", "true", "yes")
 
 UNCERTAINTY_DETAIL = (
