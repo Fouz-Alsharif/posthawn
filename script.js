@@ -287,7 +287,7 @@ function setUploadError(message) {
 function handleFile(file) {
   if (!file) return;
 
-  const maxSize = 3 * 1024 * 1024;
+  const maxSize = 10 * 1024 * 1024;
   const validType = file.type.startsWith("image/");
 
   if (!validType) {
@@ -296,7 +296,7 @@ function handleFile(file) {
   }
 
   if (file.size > maxSize) {
-    setUploadError("Image size must be 3 MB or less.");
+    setUploadError("Image size must be 10 MB or less.");
     return;
   }
 
