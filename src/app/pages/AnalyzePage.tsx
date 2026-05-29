@@ -9,9 +9,9 @@ export default function AnalyzePage() {
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const maxSize = 3 * 1024 * 1024; // 3MB
+      const maxSize = 10 * 1024 * 1024; // 10MB
       if (file.size > maxSize) {
-        setError('Image size must be 3 MB or less.');
+        setError('Image size must be 10 MB or less.');
         return;
       }
       setError('');
@@ -33,9 +33,9 @@ export default function AnalyzePage() {
     input.onchange = (e) => {
       const file = (e.target as HTMLInputElement).files?.[0];
       if (file) {
-        const maxSize = 3 * 1024 * 1024;
+        const maxSize = 10 * 1024 * 1024;
         if (file.size > maxSize) {
-          setError('Image size must be 3 MB or less.');
+          setError('Image size must be 10 MB or less.');
           return;
         }
         setError('');
@@ -88,7 +88,7 @@ export default function AnalyzePage() {
           <h3 className="text-base mb-3">Requirements:</h3>
           <ul className="text-gray-600 text-sm space-y-1">
             <li>Image format: JPEG or PNG</li>
-            <li>Maximum file size: 3 MB</li>
+            <li>Maximum file size: 10 MB</li>
             <li>Clear, well-lit image of the burn area</li>
           </ul>
         </div>
