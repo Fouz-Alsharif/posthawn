@@ -8,7 +8,7 @@ export default function UserGuidePage() {
     {
       icon: Camera,
       title: 'Upload or Capture Image',
-      description: 'Take a clear photo of the burn area or upload an existing image (JPEG/PNG, max 3 MB).'
+      description: 'Take a clear photo of the burn area or upload an existing image (JPEG/PNG, max 10 MB).'
     },
     {
       icon: Scan,
