@@ -15,9 +15,6 @@ This version focuses on UI flow and first-aid recommendation rendering while the
 - [Configuration](#configuration)
 - [Team](#team)
 - [Supervision](#supervision)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
@@ -52,15 +49,26 @@ Current analysis output is mocked in the frontend to enable UI testing before ba
 |-- style.css
 `-- first-aid-guidance.json
 ```
+## Quick Start
+1. Open the project folder in VS Code.
+2. Right-click `index.html`.
+3. Select **Open with Live Server**.
+
+## How It Works
+1. The UI triggers an analysis flow from `script.js`.
+2. The current detection result is mocked for frontend validation.
+3. First-aid recommendations are retrieved from `first-aid-guidance.json`.
+4. Results and guidance are rendered in the interface.
+
 ## Supervision
 
 - **Project Supervisor:** Dr. Areej Alsini
-- 
+  
 ## Team
 
 - **Team Leader:** [Fouz Alsharif]
 - **Team Members:**
-  - [Maria Alamri]
   - [Lama Aloufi]
+  - [Maria Alamri]
   - [Judy Alomiri]
   
