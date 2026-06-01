@@ -90,7 +90,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
           <div className="text-center text-gray-400 text-sm border-t border-gray-700 pt-4">
-            @hawn 2025
+            @hawn 2026
           </div>
         </div>
       </footer>
