@@ -12,9 +12,8 @@ This version focuses on UI flow and first-aid recommendation rendering while the
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
 - [How It Works](#how-it-works)
-- [Configuration](#configuration)
+-  [Supervision](#supervision)
 - [Team](#team)
-- [Supervision](#supervision)
 
 ## Overview
 
